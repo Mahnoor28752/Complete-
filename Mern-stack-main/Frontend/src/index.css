@@ -1,0 +1,377 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    --radius: 0.5rem;
+  }
+}
+
+body {
+  @apply bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 text-white min-h-screen;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400;
+  }
+  
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+}
+/* Add these to your existing index.css */
+
+/* QR Scanner Animation Styles */
+.dashboard-mockup {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.mockup-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.mockup-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.mockup-dot:nth-child(1) {
+  background: #6A0DAD;
+}
+
+.mockup-dot:nth-child(2) {
+  background: #FFD700;
+  animation-delay: 0.2s;
+}
+
+.mockup-dot:nth-child(3) {
+  background: #00D084;
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+.qr-container {
+  width: 100%;
+  height: calc(100% - 40px);
+  background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), rgba(255, 215, 0, 0.1));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6A0DAD, transparent);
+  top: 0;
+  animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%, 100% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+}
+
+.qr-code {
+  width: 70%;
+  height: 70%;
+  background: #fff;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 3px;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.qr-pixel {
+  background: #000;
+  border-radius: 2px;
+  animation: pixelAppear 1s ease-in-out infinite;
+}
+
+.qr-pixel:nth-child(4n) {
+  animation-delay: 0.1s;
+}
+
+.qr-pixel:nth-child(4n+1) {
+  animation-delay: 0.2s;
+}
+
+.qr-pixel:nth-child(4n+2) {
+  animation-delay: 0.3s;
+}
+
+@keyframes pixelAppear {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+}
+
+.corner-frame {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #6A0DAD;
+  animation: cornerPulse 2s ease-in-out infinite;
+}
+
+.corner-frame.tl {
+  top: 10%;
+  left: 10%;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-frame.tr {
+  top: 10%;
+  right: 10%;
+  border-left: none;
+  border-bottom: none;
+  animation-delay: 0.5s;
+}
+
+.corner-frame.bl {
+  bottom: 10%;
+  left: 10%;
+  border-right: none;
+  border-top: none;
+  animation-delay: 1s;
+}
+
+.corner-frame.br {
+  bottom: 10%;
+  right: 10%;
+  border-left: none;
+  border-top: none;
+  animation-delay: 1.5s;
+}
+
+@keyframes cornerPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* Add these to your existing index.css */
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400;
+}
+
+.glass-effect {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+}
+
+/* QR Scanner Animation Styles */
+.dashboard-mockup {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.mockup-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.mockup-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.mockup-dot:nth-child(1) { background: #6A0DAD; }
+.mockup-dot:nth-child(2) { background: #FFD700; animation-delay: 0.2s; }
+.mockup-dot:nth-child(3) { background: #00D084; animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+.qr-container {
+  width: 100%;
+  height: calc(100% - 40px);
+  background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), rgba(255, 215, 0, 0.1));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6A0DAD, transparent);
+  top: 0;
+  animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%, 100% { top: 0; }
+  50% { top: 100%; }
+}
+
+.qr-code {
+  width: 70%;
+  height: 70%;
+  background: #fff;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 3px;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.qr-pixel {
+  background: #000;
+  border-radius: 2px;
+  animation: pixelAppear 1s ease-in-out infinite;
+}
+
+.qr-pixel:nth-child(4n) { animation-delay: 0.1s; }
+.qr-pixel:nth-child(4n+1) { animation-delay: 0.2s; }
+.qr-pixel:nth-child(4n+2) { animation-delay: 0.3s; }
+
+@keyframes pixelAppear {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.95); }
+}
+
+.corner-frame {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #6A0DAD;
+  animation: cornerPulse 2s ease-in-out infinite;
+}
+
+.corner-frame.tl {
+  top: 10%;
+  left: 10%;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-frame.tr {
+  top: 10%;
+  right: 10%;
+  border-left: none;
+  border-bottom: none;
+  animation-delay: 0.5s;
+}
+
+.corner-frame.bl {
+  bottom: 10%;
+  left: 10%;
+  border-right: none;
+  border-top: none;
+  animation-delay: 1s;
+}
+
+.corner-frame.br {
+  bottom: 10%;
+  right: 10%;
+  border-left: none;
+  border-top: none;
+  animation-delay: 1.5s;
+}
+
+@keyframes cornerPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
